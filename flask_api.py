@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 import logging
+import uuid
+import json
 
 app = Flask(__name__)
 
@@ -12,6 +14,15 @@ def landing():
 
 @app.route('/', methods=['POST'])
 def api():
-    print(request)
-    logging.info(request)
-    return 200
+    data = request.json
+
+    print(data)
+    
+    message = app.config['AZURE_TABLE']
+    rowkey = str(uuid.uuid4())
+
+    data['rowKey'] = rowkey
+
+
+    message.set(json.dumps(data))
+    return rowkey

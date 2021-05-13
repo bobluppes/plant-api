@@ -11,5 +11,6 @@ application = DispatcherMiddleware(None, {
 })
 
 # Wrap the Flask app as WSGI application
-def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
+def main(req: func.HttpRequest, context: func.Context, message: func.Out[str]) -> func.HttpResponse:
+    app.config['AZURE_TABLE'] = message
     return func.WsgiMiddleware(application).handle(req, context)
