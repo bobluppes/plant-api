@@ -5,9 +5,9 @@ from ..flask_api import app
 
 # rewrite URL:s to Azure function mount point (you can configure this in host.json and function.json)
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
-app.config["APPLICATION_ROOT"] = "/api/app"     # Flask app configuration so it knows correct endpoint urls
+app.config["APPLICATION_ROOT"] = "/api/sensor"     # Flask app configuration so it knows correct endpoint urls
 application = DispatcherMiddleware(None, {
-    '/api/app': app,
+    '/api/sensor': app,
 })
 
 # Wrap the Flask app as WSGI application
