@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import logging
 
 app = Flask(__name__)
 
@@ -12,4 +13,5 @@ def landing():
 @app.route('/', methods=['POST'])
 def api():
     print(request)
+    logging.info(request)
     return 200
